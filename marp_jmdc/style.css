@@ -1,0 +1,287 @@
+/*
+ * JMDC 精密再現 Marp Theme
+ * PPTX解析値: 12192000 x 6858000 EMU (1280 x 720 px相当)
+ * 
+ * このテーマはJMDCのPowerPointテンプレートを忠実に再現しています。
+ * LLMでの使用を想定し、明確なクラス定義とコメントを含みます。
+ */
+
+section {
+  --primary: #0CAA41;
+  --secondary: #53C57A;
+  --bg-color: #FFFFFF;
+  --text-color: #2D2D2D;
+  --accent-soft: #C2E9BE;
+  --accent-very-soft: #E5F5EA;
+  --gray: #9B9B9B;
+
+  width: 1280px;
+  height: 720px;
+  padding: 85px 85px 100px 85px;
+  font-family: 'Noto Sans CJK JP', 'Noto Sans JP', sans-serif;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  font-size: 28px;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+}
+
+/* ========================================
+   ヘッダーとフッターの共通設定
+   ======================================== */
+
+/* ヘッダー: ロゴ配置 (右上) */
+header {
+  position: absolute;
+  top: 67px;
+  right: 85px;
+  width: 278px;
+  height: 40px;
+  text-align: right;
+  z-index: 10;
+}
+
+header::after {
+  content: url('assets/image4.svg');
+  display: inline-block;
+  height: 40px;
+}
+
+/* フッター: コピーライトと頁番号 */
+footer {
+  position: absolute;
+  bottom: 40px;
+  left: 66px;
+  right: 66px;
+  font-size: 14px;
+  color: var(--gray);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--accent-soft);
+  padding-top: 10px;
+}
+
+/* スライド番号 */
+section::after {
+  position: absolute;
+  bottom: 48px;
+  right: 82px;
+  font-size: 14px;
+  color: var(--text-color);
+  content: attr(data-marpit-pagination);
+}
+
+/* ========================================
+   スライドタイプ別の定義
+   ======================================== */
+
+/* 
+ * 1. 表紙スライド (class: title)
+ * 用途: プレゼンテーションの最初と最後
+ * 特徴: グリーン背景、白抜きロゴ、中央揃え
+ */
+section.title {
+  background-color: var(--primary);
+  color: white;
+  padding: 85px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+section.title header::after {
+  content: url('assets/image4.svg');
+  filter: brightness(0) invert(1);
+}
+
+section.title h1 {
+  margin-top: 40px;
+  font-size: 67px;
+  color: white;
+  font-weight: bold;
+}
+
+section.title h2 {
+  font-size: 38px;
+  color: white;
+  border-bottom: none;
+  font-weight: normal;
+  margin-top: 20px;
+}
+
+/* 表紙のメタ情報（日付、氏名など） */
+.title-meta {
+  margin-top: 60px;
+  font-size: 24px;
+  opacity: 0.9;
+}
+
+/* 
+ * 2. セクション見出しスライド (class: section-title)
+ * 用途: 章や大きなテーマの区切り
+ * 特徴: ライトグリーン背景、大きなタイトル
+ */
+section.section-title {
+  background-color: var(--accent-very-soft);
+  padding: 85px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+section.section-title h1 {
+  font-size: 67px;
+  color: var(--secondary);
+  margin: 0;
+  padding: 0;
+}
+
+section.section-title h2 {
+  font-size: 44px;
+  color: var(--text-color);
+  border-bottom: none;
+  margin-top: 10px;
+}
+
+/* 
+ * 3. 標準コンテンツスライド (クラス指定なし)
+ * 用途: 通常のコンテンツ表示
+ * 特徴: 白背景、上部にタイトル、本文エリア
+ */
+
+/* タイトルは上部に配置（絶対配置から通常配置に変更してより柔軟に） */
+h1 {
+  font-size: 42px;
+  color: #000000;
+  margin: 0 0 30px 0;
+  padding-bottom: 10px;
+  border-bottom: 3px solid var(--primary);
+}
+
+h2 {
+  font-size: 32px;
+  color: var(--secondary);
+  margin: 20px 0 15px 0;
+}
+
+h3 {
+  font-size: 26px;
+  color: var(--text-color);
+  margin: 15px 0 10px 0;
+}
+
+/* ========================================
+   コンテンツ要素のスタイル
+   ======================================== */
+
+/* 箇条書き */
+ul {
+  margin-left: 0.5em;
+  line-height: 1.6;
+}
+
+ul li {
+  margin-bottom: 0.5em;
+}
+
+ul li::marker {
+  color: var(--primary);
+}
+
+/* 番号付きリスト */
+ol {
+  margin-left: 0.5em;
+  line-height: 1.6;
+}
+
+ol li {
+  margin-bottom: 0.5em;
+}
+
+/* テーブル */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+table th {
+  background-color: var(--primary);
+  color: white;
+  padding: 12px;
+  text-align: left;
+  font-weight: bold;
+}
+
+table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--accent-soft);
+}
+
+table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* 強調ボックス（blockquote） */
+blockquote {
+  background: var(--accent-very-soft);
+  border-left: 10px solid var(--primary);
+  padding: 20px;
+  margin: 20px 0;
+  font-style: normal;
+}
+
+/* コードブロック */
+pre {
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 15px;
+  overflow-x: auto;
+}
+
+code {
+  background-color: #f0f0f0;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+}
+
+/* ========================================
+   レイアウトユーティリティ
+   ======================================== */
+
+/* 2カラムレイアウト */
+.columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 40px;
+  margin-top: 20px;
+}
+
+/* 3カラムレイアウト */
+.columns-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 30px;
+  margin-top: 20px;
+}
+
+/* 小さい文字 */
+.small {
+  font-size: 0.8em;
+}
+
+/* 中央揃え */
+.center {
+  text-align: center;
+}
+
+/* 右揃え */
+.right {
+  text-align: right;
+}
