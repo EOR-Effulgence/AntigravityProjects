@@ -1,0 +1,25 @@
+# Outputs
+output.html
+output.pdf
+*.html
+*.pdf
+
+# Development files
+analyze_pptx.py
+pptx_analysis*.json
+JMDC2022_*.pptx
+JMDC2022_16対9(標準)_v1.1/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Node
+node_modules/
+
+# OS
+.DS_Store
+
+# Archive
+_archive/

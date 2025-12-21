@@ -1,0 +1,19 @@
+{
+    "name": "jmdc-marp-template",
+    "version": "1.0.0",
+    "description": "JMDC Brand Marp Presentation Template",
+    "scripts": {
+        "build": "npx @marp-team/marp-cli@latest examples/sample.md -o output.html",
+        "build:pdf": "npx @marp-team/marp-cli@latest examples/sample.md -o output.pdf",
+        "preview": "npx @marp-team/marp-cli@latest examples/sample.md --preview",
+        "serve": "python3 -m http.server 8080"
+    },
+    "keywords": [
+        "marp",
+        "presentation",
+        "jmdc"
+    ],
+    "author": "JMDC Inc.",
+    "license": "UNLICENSED",
+    "private": true
+}
