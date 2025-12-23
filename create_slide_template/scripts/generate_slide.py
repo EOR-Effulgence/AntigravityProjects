@@ -17,6 +17,24 @@ def load_slide_data(json_path: str) -> dict:
         return json.load(f)
 
 
+# グラフ・表・画像ユーティリティのインポート
+scripts_dir = Path(__file__).parent
+sys.path.append(str(scripts_dir))
+
+chart_utils = None
+image_utils = None
+
+try:
+    import chart_utils
+except ImportError:
+    print("警告: chart_utils.py が見つかりません。グラフ・表の生成はスキップされます。")
+
+try:
+    import image_utils
+except ImportError:
+    print("警告: image_utils.py が見つかりません。画像生成はスキップされます。")
+
+
 def load_mapping(config_path: str) -> dict:
     """レイアウトマッピング設定を読み込む"""
     with open(config_path, 'r', encoding='utf-8') as f:
@@ -73,10 +91,6 @@ def create_presentation(template_path: str, slide_data: dict, output_path: str, 
             target_idx = config["idx"]
             
             # 入力データにそのフィールドの値があるか確認
-            # slide_info = {"layout": "...", "title": "...", "content": [...]}
-            # field = "title" or "content" etc.
-            
-            # 特別対応: bodyとcontentは相互に融通を利かせる（入力JSONのゆらぎ吸収）
             content_value = slide_info.get(field)
             if content_value is None:
                 if field == "content" and "body" in slide_info:
@@ -107,6 +121,33 @@ def create_presentation(template_path: str, slide_data: dict, output_path: str, 
                 except KeyError:
                     print(f"警告: スライド[{i}] '{layout_name}' のプレースホルダー idx={target_idx} ({field}) が見つかりません。")
         
+        # グラフの追加
+        if "charts" in slide_info and chart_utils:
+            for chart_info in slide_info["charts"]:
+                try:
+                    chart_utils.add_chart_to_slide(slide, chart_info)
+                    print(f"  - グラフ追加: {chart_info.get('title', 'No Title')}")
+                except Exception as e:
+                    print(f"  - グラフ追加エラー: {e}")
+
+        # 表の追加
+        if "tables" in slide_info and chart_utils:
+            for table_info in slide_info["tables"]:
+                try:
+                    chart_utils.add_table_to_slide(slide, table_info)
+                    print(f"  - 表追加")
+                except Exception as e:
+                    print(f"  - 表追加エラー: {e}")
+
+        # 画像の追加 (NanoBanaNana連携)
+        if "images" in slide_info and image_utils:
+            for image_info in slide_info["images"]:
+                try:
+                    image_utils.add_image_to_slide(slide, image_info)
+                    print(f"  - 画像追加: {image_info.get('prompt', 'No Prompt')[:20]}...")
+                except Exception as e:
+                    print(f"  - 画像追加エラー: {e}")
+
         print(f"スライド追加: {layout_name} - {slide_info.get('title', 'No Title')}")
     
     # 保存
@@ -121,6 +162,19 @@ def main():
     
     input_json = sys.argv[1]
     output_pptx = sys.argv[2]
+
+    # 出力パスの自動調整（日付フォルダ分け）
+    output_path_obj = Path(output_pptx)
+    if len(output_path_obj.parts) == 1: # ファイル名のみの場合
+        import datetime
+        today_str = datetime.datetime.now().strftime('%Y%m%d')
+        output_dir = Path("output") / today_str
+        output_dir.mkdir(parents=True, exist_ok=True)
+        output_pptx = str(output_dir / output_pptx)
+        print(f"出力先フォルダを自動設定しました: {output_pptx}")
+    else:
+        # ディレクトリ指定がある場合はその親ディレクトリを作成しておく
+        output_path_obj.parent.mkdir(parents=True, exist_ok=True)
     
     # パス設定
     script_dir = Path(__file__).parent.parent

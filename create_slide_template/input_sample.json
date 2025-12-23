@@ -1,0 +1,101 @@
+{
+    "clear_existing": true,
+    "slides": [
+        {
+            "layout": "表紙",
+            "title": "Next Gen AI Solutions",
+            "subtitle": "Transforming Business with Intelligent Data"
+        },
+        {
+            "layout": "目次",
+            "title": "Agenda",
+            "body": "1. Vision & Strategy\n2. AI Data Flow\n3. Market Growth Analysis\n4. System Overview"
+        },
+        {
+            "layout": "中見出し",
+            "title": "Architecture & Data",
+            "subtitle": "Technical Deep Dive"
+        },
+        {
+            "layout": "コンテンツ",
+            "title": "AI Data Flow",
+            "content": [
+                "Seamless Data Integration: Unifying data silos across the enterprise.",
+                "Intelligent Processing: Advanced neural networks analyze patterns with <10ms latency.",
+                "Actionable Insights: delivering predictive analytics directly to decision makers."
+            ],
+            "images": [
+                {
+                    "path": "/Users/hiratani/Documents/AntigravityProjects/create_slide_template/output/images/ai_data_flow.png",
+                    "position": {
+                        "left": 7.0,
+                        "top": 2.0,
+                        "width": 5.5,
+                        "height": 4.0
+                    }
+                }
+            ]
+        },
+        {
+            "layout": "コンテンツ",
+            "title": "Market Growth",
+            "content": [
+                "Rapid Adoption: We are seeing unprecedented growth in the sector.",
+                "Revenue Increase: Projected 30% Year-over-Year revenue increase driven by AI adoption.",
+                "Strategic Focus: Healthcare and Finance sectors are leading the charge."
+            ],
+            "charts": [
+                {
+                    "type": "COLUMN_CLUSTERED",
+                    "title": "Annual Revenue Growth",
+                    "data": {
+                        "categories": [
+                            "2023",
+                            "2024",
+                            "2025 (Est)"
+                        ],
+                        "series": [
+                            {
+                                "name": "Revenue ($M)",
+                                "values": [
+                                    120,
+                                    156,
+                                    210
+                                ]
+                            }
+                        ]
+                    },
+                    "position": {
+                        "left": 7.0,
+                        "top": 2.0,
+                        "width": 5.0,
+                        "height": 3.5
+                    }
+                }
+            ]
+        },
+        {
+            "layout": "コンテンツ",
+            "title": "System Architecture",
+            "content": [
+                "Scalable Infrastructure: Auto-scaling cloud resources to process terabytes of data.",
+                "Secure Gateway: Enterprise-grade security with encrypted API endpoints.",
+                "Multi-Platform: Native support for Web, iOS, and Android clients."
+            ],
+            "images": [
+                {
+                    "path": "/Users/hiratani/Documents/AntigravityProjects/create_slide_template/output/images/system_architecture.png",
+                    "position": {
+                        "left": 5.5,
+                        "top": 3.5,
+                        "width": 6.0,
+                        "height": 3.5
+                    }
+                }
+            ]
+        },
+        {
+            "layout": "裏表紙"
+        }
+    ]
+}

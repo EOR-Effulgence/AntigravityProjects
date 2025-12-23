@@ -43,10 +43,6 @@
                 "idx": 0,
                 "description": "スライドタイトル"
             },
-            "subtitle": {
-                "idx": 13,
-                "description": "リード文・サブタイトル（タイトル下）"
-            },
             "content": {
                 "idx": 1,
                 "description": "メインコンテンツエリア"

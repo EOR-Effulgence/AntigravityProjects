@@ -1,0 +1,52 @@
+{
+    "clear_existing": true,
+    "slides": [
+        {
+            "layout": "表紙",
+            "title": "AIトレンド予測 2030",
+            "subtitle": "NanoBanaNana連携デモ (Antigravity生成)",
+            "date": "2025年12月"
+        },
+        {
+            "layout": "コンテンツ",
+            "title": "1. 市場成長の未来図",
+            "subtitle": "AI市場の概念的成長",
+            "content": [
+                "生成AI市場は指数関数的に拡大",
+                "あらゆる産業への浸透が進む"
+            ],
+            "images": [
+                {
+                    "generated": false,
+                    "path": "/Users/hiratani/.gemini/antigravity/brain/a0078add-1f42-447e-97a4-57026bc8015e/ai_market_growth_neon_1766494512372.png",
+                    "position": {
+                        "left": 5.0,
+                        "top": 2.5,
+                        "width": 6.0,
+                        "height": 4.0
+                    }
+                }
+            ]
+        },
+        {
+            "layout": "コンテンツ",
+            "title": "2. テクノロジーの融合",
+            "subtitle": "ハードウェアとソフトウェアの結合",
+            "content": [
+                "物理世界とデジタル世界の境界消失"
+            ],
+            "images": [
+                {
+                    "generated": false,
+                    "path": "/Users/hiratani/.gemini/antigravity/brain/a0078add-1f42-447e-97a4-57026bc8015e/brain_chip_isometric_1766494529850.png",
+                    "position": {
+                        "left": 2.0,
+                        "top": 3.0,
+                        "width": 5.0,
+                        "height": 3.5
+                    }
+                }
+            ]
+        }
+    ]
+}
