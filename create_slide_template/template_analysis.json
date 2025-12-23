@@ -1,0 +1,337 @@
+{
+  "template_file": "/Users/hiratani/Documents/AntigravityProjects/create_slide_template/JMDC2022_16対9(標準)_v1.1.pptx",
+  "slide_width": 12192000,
+  "slide_height": 6858000,
+  "slide_width_inches": 13.333333333333334,
+  "slide_height_inches": 7.5,
+  "slide_masters": [
+    {
+      "index": 0,
+      "name": "",
+      "theme_color": {},
+      "layouts": [
+        {
+          "index": 0,
+          "name": "表紙",
+          "placeholders": [
+            {
+              "idx": 0,
+              "type": "CENTER_TITLE (3)",
+              "name": "Title 1",
+              "left": 3.1270231846019247,
+              "top": 2.7679418197725285,
+              "width": 6.847222222222222,
+              "height": 1.1456692913385826
+            },
+            {
+              "idx": 1,
+              "type": "SUBTITLE (4)",
+              "name": "Subtitle 2",
+              "left": 3.1270231846019247,
+              "top": 4.461360454943132,
+              "width": 6.847222222222222,
+              "height": 0.4066951006124234
+            },
+            {
+              "idx": 13,
+              "type": "BODY (2)",
+              "name": "テキスト プレースホルダー 10",
+              "left": 3.1270231846019247,
+              "top": 5.30680227471566,
+              "width": 6.847222222222222,
+              "height": 0.27165354330708663
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "name": "目次",
+          "placeholders": [
+            {
+              "idx": 0,
+              "type": "TITLE (1)",
+              "name": "Title 1",
+              "left": 0.8906255468066492,
+              "top": 1.1510422134733158,
+              "width": 11.552084426946632,
+              "height": 0.7086614173228346
+            },
+            {
+              "idx": 11,
+              "type": "BODY (2)",
+              "name": "テキスト プレースホルダー 4",
+              "left": 3.375001093613298,
+              "top": 2.5666940069991253,
+              "width": 6.583332239720035,
+              "height": 4.273632983377078
+            },
+            {
+              "idx": 15,
+              "type": "BODY (2)",
+              "name": "テキスト プレースホルダー 6",
+              "left": 0.6874989063867016,
+              "top": 6.862204724409449,
+              "width": 11.956692913385826,
+              "height": 0.17934383202099738
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "name": "中見出し",
+          "placeholders": [
+            {
+              "idx": 1,
+              "type": "SUBTITLE (4)",
+              "name": "Subtitle 2",
+              "left": 0.6299201662292213,
+              "top": 2.5938713910761155,
+              "width": 12.073490813648293,
+              "height": 0.984251968503937
+            },
+            {
+              "idx": 0,
+              "type": "TITLE (1)",
+              "name": "Title 1",
+              "left": 0.6299201662292213,
+              "top": 3.75,
+              "width": 12.073490813648293,
+              "height": 0.3937007874015748
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "name": "コンテンツ",
+          "placeholders": [
+            {
+              "idx": 0,
+              "type": "TITLE (1)",
+              "name": "Title 1",
+              "left": 0.8906277340332458,
+              "top": 0.2065977690288714,
+              "width": 11.552081146106737,
+              "height": 0.6790332458442695
+            },
+            {
+              "idx": 1,
+              "type": "OBJECT (7)",
+              "name": "Content Placeholder 2",
+              "left": 0.8906255468066492,
+              "top": 2.094076990376203,
+              "width": 11.552083333333334,
+              "height": 4.7592716535433075
+            },
+            {
+              "idx": 13,
+              "type": "BODY (2)",
+              "name": "テキスト プレースホルダー 9",
+              "left": 0.8906266404199475,
+              "top": 0.8651640419947506,
+              "width": 11.552082239720034,
+              "height": 0.984251968503937
+            },
+            {
+              "idx": 15,
+              "type": "BODY (2)",
+              "name": "テキスト プレースホルダー 6",
+              "left": 0.6874989063867016,
+              "top": 6.862204724409449,
+              "width": 11.956692913385826,
+              "height": 0.17934383202099738
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "name": "裏表紙",
+          "placeholders": []
+        }
+      ]
+    }
+  ],
+  "existing_slides": [
+    {
+      "index": 0,
+      "layout_name": "表紙",
+      "shapes_count": 5,
+      "shapes": [
+        {
+          "name": "オブジェクト 5",
+          "shape_type": "EMBEDDED_OLE_OBJECT (7)",
+          "left": 0.00173665791776028,
+          "top": 0.00173665791776028,
+          "width": 0.00173665791776028,
+          "height": 0.00173665791776028
+        },
+        {
+          "name": "タイトル 1",
+          "shape_type": "PLACEHOLDER (14)",
+          "left": 3.1270231846019247,
+          "top": 2.7679418197725285,
+          "width": 6.847222222222222,
+          "height": 1.1456692913385826,
+          "text": "令和7年度向けサービスのご提案\u000b健康課題を解決するソリューションのご案内"
+        },
+        {
+          "name": "字幕 2",
+          "shape_type": "PLACEHOLDER (14)",
+          "left": 3.1270231846019247,
+          "top": 4.461360454943132,
+          "width": 6.847222222222222,
+          "height": 0.4066951006124234,
+          "text": "株式会社JMDC\n公共政策・産学連携本部"
+        },
+        {
+          "name": "テキスト プレースホルダー 3",
+          "shape_type": "PLACEHOLDER (14)",
+          "left": 3.1270231846019247,
+          "top": 5.30680227471566,
+          "width": 6.847222222222222,
+          "height": 0.27165354330708663,
+          "text": "202x年xx月xx日"
+        },
+        {
+          "name": "グループ化 4",
+          "shape_type": "GROUP (6)",
+          "left": 0.2821478565179353,
+          "top": 0.11098753280839894,
+          "width": 3.2500984251968505,
+          "height": 0.6027449693788276
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "layout_name": "目次",
+      "shapes_count": 4,
+      "shapes": [
+        {
+          "name": "オブジェクト 5",
+          "shape_type": "EMBEDDED_OLE_OBJECT (7)",
+          "left": 0.00173665791776028,
+          "top": 0.00173665791776028,
+          "width": 0.00173665791776028,
+          "height": 0.00173665791776028
+        },
+        {
+          "name": "タイトル 1",
+          "shape_type": "PLACEHOLDER (14)",
+          "left": 0.8906255468066492,
+          "top": 1.1510422134733158,
+          "width": 11.552084426946632,
+          "height": 0.7086614173228346,
+          "text": "タイトル (20pt, 上下中央揃え, Bold)"
+        },
+        {
+          "name": "テキスト プレースホルダー 2",
+          "shape_type": "PLACEHOLDER (14)",
+          "left": 3.375001093613298,
+          "top": 2.5666940069991253,
+          "width": 6.583332239720035,
+          "height": 4.273632983377078,
+          "text": "項目内容入力 (16pt, 上中央揃え, Non-bold)\n項目内容入力\n項目内容入力\n項目内容入力\n項目内容入力\n"
+        },
+        {
+          "name": "テキスト プレースホルダー 3",
+          "shape_type": "PLACEHOLDER (14)",
+          "left": 0.6874989063867016,
+          "top": 6.862204724409449,
+          "width": 11.956692913385826,
+          "height": 0.17934383202099738,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "layout_name": "中見出し",
+      "shapes_count": 3,
+      "shapes": [
+        {
+          "name": "オブジェクト 3",
+          "shape_type": "EMBEDDED_OLE_OBJECT (7)",
+          "left": 0.00173665791776028,
+          "top": 0.00173665791776028,
+          "width": 0.00173665791776028,
+          "height": 0.00173665791776028
+        },
+        {
+          "name": "字幕 1",
+          "shape_type": "PLACEHOLDER (14)",
+          "left": 0.6299201662292213,
+          "top": 2.5938713910761155,
+          "width": 12.073490813648293,
+          "height": 0.984251968503937,
+          "text": "Section (50pt, 下揃え, Bold)"
+        },
+        {
+          "name": "タイトル 2",
+          "shape_type": "PLACEHOLDER (14)",
+          "left": 0.6299201662292213,
+          "top": 3.75,
+          "width": 12.073490813648293,
+          "height": 0.3937007874015748,
+          "text": "タイトル (32pt, 上揃え, Bold)"
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "layout_name": "コンテンツ",
+      "shapes_count": 5,
+      "shapes": [
+        {
+          "name": "オブジェクト 8",
+          "shape_type": "EMBEDDED_OLE_OBJECT (7)",
+          "left": 0.00173665791776028,
+          "top": 0.00173665791776028,
+          "width": 0.00173665791776028,
+          "height": 0.00173665791776028
+        },
+        {
+          "name": "タイトル 1",
+          "shape_type": "PLACEHOLDER (14)",
+          "left": 0.8906277340332458,
+          "top": 0.2065977690288714,
+          "width": 11.552081146106737,
+          "height": 0.6790332458442695,
+          "text": "タイトル (20pt, Bold)"
+        },
+        {
+          "name": "コンテンツ プレースホルダー 2",
+          "shape_type": "PLACEHOLDER (14)",
+          "left": 0.8906255468066492,
+          "top": 2.094076990376203,
+          "width": 11.552083333333334,
+          "height": 4.7592716535433075,
+          "text": "本文 (16pt, Non-bold)\n第2レベル\n第3レベル\n"
+        },
+        {
+          "name": "テキスト プレースホルダー 3",
+          "shape_type": "PLACEHOLDER (14)",
+          "left": 0.8906266404199475,
+          "top": 0.8651640419947506,
+          "width": 11.552082239720034,
+          "height": 0.984251968503937,
+          "text": "メッセージ (16pt, Non-bold)\n第2レベル\n\n"
+        },
+        {
+          "name": "テキスト プレースホルダー 4",
+          "shape_type": "PLACEHOLDER (14)",
+          "left": 0.6874989063867016,
+          "top": 6.862204724409449,
+          "width": 11.956692913385826,
+          "height": 0.17934383202099738,
+          "text": "Note:  xxxxxxxxxxxxxxxxxxx\nSource:  xxxxxxxx, xxxxxxxxxxx, xxxxxxxxx and xxxxxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "layout_name": "裏表紙",
+      "shapes_count": 0,
+      "shapes": []
+    }
+  ]
+}

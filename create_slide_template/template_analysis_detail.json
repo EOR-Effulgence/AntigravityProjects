@@ -1,0 +1,201 @@
+{
+  "template_file": "/Users/hiratani/Documents/AntigravityProjects/create_slide_template/JMDC2022_16対9(標準)_v1.1.pptx",
+  "slide_width": 12192000,
+  "slide_height": 6858000,
+  "slide_width_inches": 13.333333333333334,
+  "slide_height_inches": 7.5,
+  "slide_masters": [
+    {
+      "index": 0,
+      "name": "",
+      "layouts": [
+        {
+          "index": 0,
+          "name": "表紙",
+          "placeholders": [
+            {
+              "idx": 0,
+              "type": "CENTER_TITLE (3)",
+              "name": "Title 1",
+              "left": 2859350,
+              "top": 2531006,
+              "width": 6261100,
+              "height": 1047600,
+              "left_inch": 3.1270231846019247,
+              "top_inch": 2.7679418197725285,
+              "width_inch": 6.847222222222222,
+              "height_inch": 1.1456692913385826
+            },
+            {
+              "idx": 1,
+              "type": "SUBTITLE (4)",
+              "name": "Subtitle 2",
+              "left": 2859350,
+              "top": 4079468,
+              "width": 6261100,
+              "height": 371882,
+              "left_inch": 3.1270231846019247,
+              "top_inch": 4.461360454943132,
+              "width_inch": 6.847222222222222,
+              "height_inch": 0.4066951006124234
+            },
+            {
+              "idx": 13,
+              "type": "BODY (2)",
+              "name": "テキスト プレースホルダー 10",
+              "left": 2859350,
+              "top": 4852540,
+              "width": 6261100,
+              "height": 248400,
+              "left_inch": 3.1270231846019247,
+              "top_inch": 5.30680227471566,
+              "width_inch": 6.847222222222222,
+              "height_inch": 0.27165354330708663
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "name": "目次",
+          "placeholders": [
+            {
+              "idx": 0,
+              "type": "TITLE (1)",
+              "name": "Title 1",
+              "left": 814388,
+              "top": 1052513,
+              "width": 10563226,
+              "height": 648000,
+              "left_inch": 0.8906255468066492,
+              "top_inch": 1.1510422134733158,
+              "width_inch": 11.552084426946632,
+              "height_inch": 0.7086614173228346
+            },
+            {
+              "idx": 11,
+              "type": "BODY (2)",
+              "name": "テキスト プレースホルダー 4",
+              "left": 3086101,
+              "top": 2346985,
+              "width": 6019799,
+              "height": 3907810,
+              "left_inch": 3.375001093613298,
+              "top_inch": 2.5666940069991253,
+              "width_inch": 6.583332239720035,
+              "height_inch": 4.273632983377078
+            },
+            {
+              "idx": 15,
+              "type": "BODY (2)",
+              "name": "テキスト プレースホルダー 6",
+              "left": 628649,
+              "top": 6274800,
+              "width": 10933200,
+              "height": 163992,
+              "left_inch": 0.6874989063867016,
+              "top_inch": 6.862204724409449,
+              "width_inch": 11.956692913385826,
+              "height_inch": 0.17934383202099738
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "name": "中見出し",
+          "placeholders": [
+            {
+              "idx": 1,
+              "type": "SUBTITLE (4)",
+              "name": "Subtitle 2",
+              "left": 575999,
+              "top": 2371836,
+              "width": 11040000,
+              "height": 900000,
+              "left_inch": 0.6299201662292213,
+              "top_inch": 2.5938713910761155,
+              "width_inch": 12.073490813648293,
+              "height_inch": 0.984251968503937
+            },
+            {
+              "idx": 0,
+              "type": "TITLE (1)",
+              "name": "Title 1",
+              "left": 575999,
+              "top": 3429000,
+              "width": 11040000,
+              "height": 360000,
+              "left_inch": 0.6299201662292213,
+              "top_inch": 3.75,
+              "width_inch": 12.073490813648293,
+              "height_inch": 0.3937007874015748
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "name": "コンテンツ",
+          "placeholders": [
+            {
+              "idx": 0,
+              "type": "TITLE (1)",
+              "name": "Title 1",
+              "left": 814390,
+              "top": 188913,
+              "width": 10563223,
+              "height": 620908,
+              "left_inch": 0.8906277340332458,
+              "top_inch": 0.2065977690288714,
+              "width_inch": 11.552081146106737,
+              "height_inch": 0.6790332458442695
+            },
+            {
+              "idx": 13,
+              "type": "BODY (2)",
+              "name": "テキスト プレースホルダー 9",
+              "left": 814389,
+              "top": 791106,
+              "width": 10563224,
+              "height": 900000,
+              "left_inch": 0.8906266404199475,
+              "top_inch": 0.8651640419947506,
+              "width_inch": 11.552082239720034,
+              "height_inch": 0.984251968503937
+            },
+            {
+              "idx": 1,
+              "type": "OBJECT (7)",
+              "name": "Content Placeholder 2",
+              "left": 814388,
+              "top": 1914824,
+              "width": 10563225,
+              "height": 4351878,
+              "left_inch": 0.8906255468066492,
+              "top_inch": 2.094076990376203,
+              "width_inch": 11.552083333333334,
+              "height_inch": 4.7592716535433075
+            },
+            {
+              "idx": 15,
+              "type": "BODY (2)",
+              "name": "テキスト プレースホルダー 6",
+              "left": 628649,
+              "top": 6274800,
+              "width": 10933200,
+              "height": 163992,
+              "left_inch": 0.6874989063867016,
+              "top_inch": 6.862204724409449,
+              "width_inch": 11.956692913385826,
+              "height_inch": 0.17934383202099738
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "name": "裏表紙",
+          "placeholders": []
+        }
+      ]
+    }
+  ],
+  "existing_slides": []
+}

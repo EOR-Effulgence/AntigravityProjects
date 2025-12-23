@@ -1,0 +1,63 @@
+{
+    "layouts": {
+        "表紙": {
+            "title": {
+                "idx": 0,
+                "description": "メインタイトル（中央上段）"
+            },
+            "subtitle": {
+                "idx": 1,
+                "description": "サブタイトル（中央中段）"
+            },
+            "date": {
+                "idx": 13,
+                "description": "日付・部署名（中央下段）"
+            }
+        },
+        "目次": {
+            "title": {
+                "idx": 0,
+                "description": "スライドタイトル"
+            },
+            "body": {
+                "idx": 11,
+                "description": "目次本文リスト"
+            },
+            "footer": {
+                "idx": 15,
+                "description": "フッター"
+            }
+        },
+        "中見出し": {
+            "subtitle": {
+                "idx": 1,
+                "description": "セクション英語名（上段帯）"
+            },
+            "title": {
+                "idx": 0,
+                "description": "日本語タイトル（下段帯）"
+            }
+        },
+        "コンテンツ": {
+            "title": {
+                "idx": 0,
+                "description": "スライドタイトル"
+            },
+            "subtitle": {
+                "idx": 13,
+                "description": "リード文・サブタイトル（タイトル下）"
+            },
+            "content": {
+                "idx": 1,
+                "description": "メインコンテンツエリア"
+            },
+            "footer": {
+                "idx": 15,
+                "description": "フッター"
+            }
+        },
+        "裏表紙": {
+            "description": "プレースホルダーなし"
+        }
+    }
+}
