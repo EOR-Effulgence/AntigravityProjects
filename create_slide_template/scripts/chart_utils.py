@@ -13,6 +13,9 @@ CHART_TYPES = {
     "PIE": XL_CHART_TYPE.PIE,
     "BAR_CLUSTERED": XL_CHART_TYPE.BAR_CLUSTERED,
     "AREA": XL_CHART_TYPE.AREA,
+    "COLUMN": XL_CHART_TYPE.COLUMN_CLUSTERED,
+    "BAR": XL_CHART_TYPE.BAR_CLUSTERED,
+    "STACKED_COLUMN": XL_CHART_TYPE.COLUMN_STACKED,
 }
 
 def create_chart_data(data_config):
@@ -50,6 +53,82 @@ def create_chart_data(data_config):
         chart_data.add_series(name, float_values)
         
     return chart_data
+
+def parse_chart_data_from_csv(csv_text: str) -> dict:
+    """
+    Markdownのチャートブロック用CSVテキストを解析して辞書形式に変換する
+    
+    Expected format:
+    Title (Optional, handled outside or first line)
+    Header1, Header2, Header3
+    Label1, Val1, Val2
+    Label2, Val3, Val4
+    
+    Returns:
+    {
+        "categories": ["Label1", "Label2"],
+        "series": [
+            {"name": "Header2", "values": [Val1, Val3]},
+            {"name": "Header3", "values": [Val2, Val4]}
+        ]
+    }
+    """
+    import csv
+    import io
+    
+    lines = csv_text.strip().split('\n')
+    if not lines:
+        return {}
+        
+    # タイトル行の扱い（オプション）
+    # ここでは純粋なCSVパートのみを受け取る前提とするが、
+    # もし1行だけ列数が違うなどが検知できればタイトルとして扱うロジックも追加可能
+    
+    reader = csv.reader(lines)
+    header = next(reader, None)
+    
+    if not header:
+        return {}
+        
+    # Header: [CategoryKey, SeriesName1, SeriesName2, ...]
+    if len(header) < 2:
+        return {}
+        
+    series_names = header[1:]
+    categories = []
+    series_values = [[] for _ in series_names]
+    
+    for row in reader:
+        if not row: continue
+        # 行の長さが足りない場合は空文字で埋める
+        if len(row) < len(header):
+            row += [''] * (len(header) - len(row))
+            
+        categories.append(row[0])
+        
+        for i, val_str in enumerate(row[1:]):
+            if i < len(series_values):
+                try:
+                    # 数値変換（カンマ除去など）
+                    clean_val = val_str.replace(',', '').strip()
+                    val = float(clean_val)
+                except ValueError:
+                    val = 0.0
+                series_values[i].append(val)
+                
+    # 構築
+    series_list = []
+    for i, name in enumerate(series_names):
+        series_list.append({
+            "name": name.strip(),
+            "values": series_values[i]
+        })
+        
+    return {
+        "categories": categories,
+        "series": series_list
+    }
+
 
 def add_chart_to_slide(slide, chart_info):
     """

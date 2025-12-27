@@ -1,0 +1,86 @@
+{
+    "clear_existing": true,
+    "slides": [
+        {
+            "layout": "表紙",
+            "title": "次世代病院経営のための\nAI活用ソリューションのご提案",
+            "subtitle": "医療の質向上と業務効率化の両立を目指して",
+            "description": "2025年12月28日"
+        },
+        {
+            "layout": "目次",
+            "title": "本日のアジェンダ",
+            "body": "1. 医療業界を取り巻く現状と課題\n2. AIによる業務効率化ソリューション\n3. 診断支援におけるAI活用事例\n4. 導入ロードマップと費用対効果"
+        },
+        {
+            "layout": "中見出し",
+            "title": "医療現場の課題とAIの可能性",
+            "subtitle": "持続可能な病院経営のために"
+        },
+        {
+            "layout": "コンテンツ",
+            "title": "AIによる業務負担の劇的な軽減",
+            "body": "医師・看護師の事務作業をAIが代行し、患者ケアへの集中時間を創出します。\n\n- 自動音声認識によるカルテ作成支援\n- 予約管理の自動化とキャンセル待ちの最適化\n- レセプト点検の自動化による返戻率の低下",
+            "content": [
+                "自動音声認識によるカルテ作成支援：診察中の会話をリアルタイムでテキスト化",
+                "予約管理の自動化：AIが最適な予約枠を提案し、空き時間を最小化",
+                "レセプト点検の自動化：記載ミスを事前に検知し、収益ロスを防止"
+            ],
+            "charts": [
+                {
+                    "type": "COLUMN_CLUSTERED",
+                    "title": "事務作業時間の削減効果 (月間)",
+                    "data": {
+                        "categories": [
+                            "導入前",
+                            "導入1年後",
+                            "導入3年後"
+                        ],
+                        "series": [
+                            {
+                                "name": "事務作業時間 (時間/人)",
+                                "values": [
+                                    120,
+                                    80,
+                                    45
+                                ]
+                            }
+                        ]
+                    },
+                    "position": {
+                        "left": 7.0,
+                        "top": 2.0,
+                        "width": 5.0,
+                        "height": 3.5
+                    }
+                }
+            ]
+        },
+        {
+            "layout": "コンテンツ",
+            "title": "画像診断支援AIの導入効果",
+            "body": "高精度の画像解析AIが、専門医の診断を強力にサポートします。\n\n- ダブルチェックによる見落とし防止\n- 読影時間の短縮によるスループット向上\n- 若手医師の教育ツールとしての活用",
+            "content": [
+                "見落とし防止：AIが異常箇所をヒートマップで提示し、診断精度を向上",
+                "迅速なトリアージ：緊急性の高い画像を優先的に表示",
+                "解析精度：特定の疾患において専門医と同等以上の検出率を実現"
+            ],
+            "images": [
+                {
+                    "path": "/Users/hiratani/Documents/AntigravityProjects/create_slide_template/output/images/ai_diagnosis_dummy.png",
+                    "generated": true,
+                    "prompt": "A modern hospital room with a doctor looking at a large screen showing an AI analysis of an X-ray or MRI scan. Futuristic, clean, blue tones.",
+                    "position": {
+                        "left": 7.0,
+                        "top": 2.0,
+                        "width": 5.5,
+                        "height": 3.5
+                    }
+                }
+            ]
+        },
+        {
+            "layout": "裏表紙"
+        }
+    ]
+}

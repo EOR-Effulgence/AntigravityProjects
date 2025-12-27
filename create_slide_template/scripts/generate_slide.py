@@ -109,14 +109,30 @@ def create_presentation(template_path: str, slide_data: dict, output_path: str, 
                         tf.clear()
                         for i, item in enumerate(content_value):
                             if i == 0:
-                                tf.paragraphs[0].text = item
+                                p = tf.paragraphs[0]
+                                p.text = item
                             else:
                                 p = tf.add_paragraph()
                                 p.text = item
                                 p.level = 0
+                            
+                            # フォント設定
+                            if p.runs:
+                                for run in p.runs:
+                                    run.font.name = "Noto Sans CJK JP"
+                                    # run.font.language_id = MSO_LANGUAGE_ID.JAPANESE # 必要なら
+                            
+                            # 段落全体のフォント設定（念のため）
+                            p.font.name = "Noto Sans CJK JP"
+
                     else:
                         # テキスト形式
                         shape.text = str(content_value)
+                        # テキストフレーム全体のフォントを設定
+                        for paragraph in shape.text_frame.paragraphs:
+                            paragraph.font.name = "Noto Sans CJK JP"
+                            for run in paragraph.runs:
+                                run.font.name = "Noto Sans CJK JP"
                         
                 except KeyError:
                     print(f"警告: スライド[{i}] '{layout_name}' のプレースホルダー idx={target_idx} ({field}) が見つかりません。")
