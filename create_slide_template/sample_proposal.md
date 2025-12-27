@@ -46,3 +46,27 @@ Others, 1
 
 *   日本市場におけるシェア
 *   若年層でのiPhone人気が顕著
+
+---
+
+<!-- layout: コンテンツ -->
+# フロー図の自動生成デモ (Process & Cycle)
+
+Markdownで記述するだけで、PowerPointのシェイプ（図形）としてフローチャートを描画します。
+
+## プロセス図 (Process)
+```diagram:process
+Status 1: 調査・分析
+Status 2: 企画立案
+Status 3: 開発・実装
+Status 4: リリース
+```
+
+## サイクル図 (Cycle)
+```diagram:cycle
+Plan
+Do
+Check
+Act
+```
+

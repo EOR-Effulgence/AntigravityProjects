@@ -10,10 +10,10 @@ import time
 import re
 from pathlib import Path
 import google.generativeai as genai
+import subprocess
 
-# Setup paths
-SCRIPT_DIR = Path(__file__).parent
-PROJECT_ROOT = SCRIPT_DIR.parent
+# Setup paths (Running from root)
+PROJECT_ROOT = Path(__file__).parent.absolute()
 PROMPTS_DIR = PROJECT_ROOT / "prompts"
 
 def load_prompt(name):
@@ -123,11 +123,9 @@ def main():
         
     print(f"\nMarkdown提案書を保存しました: {args.output_md}")
     
-    # Generate PPTX
+    # Generate PPTX using run_gen.py
     print("PPTXへの変換を開始します...")
-    # md_to_slideを呼び出す（subprocess経由かimport）
-    import subprocess
-    cmd = [sys.executable, str(SCRIPT_DIR / "md_to_slide.py"), args.output_md, args.output_pptx]
+    cmd = [sys.executable, str(PROJECT_ROOT / "run_gen.py"), args.output_md, args.output_pptx]
     subprocess.run(cmd, check=True)
     
     print(f"完了しました: {args.output_pptx}")

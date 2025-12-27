@@ -130,7 +130,7 @@ def parse_chart_data_from_csv(csv_text: str) -> dict:
     }
 
 
-def add_chart_to_slide(slide, chart_info):
+def add_chart_to_slide(slide, chart_info, colors=None):
     """
     スライドにグラフを追加する
     chart_info format:
@@ -140,6 +140,7 @@ def add_chart_to_slide(slide, chart_info):
         "data": { ... },
         "position": {"left": 1.0, "top": 2.0, "width": 6.0, "height": 4.0}
     }
+    colors: List of hex strings (e.g. ['#FF0000', '#00FF00'])
     """
     chart_type_str = chart_info.get("type", "COLUMN_CLUSTERED")
     chart_type = CHART_TYPES.get(chart_type_str, XL_CHART_TYPE.COLUMN_CLUSTERED)
@@ -166,6 +167,23 @@ def add_chart_to_slide(slide, chart_info):
         chart.has_title = True
         chart.chart_title.text_frame.text = title
         
+    # 色設定 (Seriesごとに適用)
+    if colors:
+        for i, series in enumerate(chart.series):
+            # 色リストをループして使用
+            color_hex = colors[i % len(colors)].lstrip('#')
+            try:
+                # 多くのグラフ（棒、円など）は fill で設定
+                fill = series.format.fill
+                fill.solid()
+                fill.fore_color.rgb = RGBColor.from_string(color_hex)
+            except Exception:
+                # 線グラフなどの場合 (line) - 厳密にはグラフタイプで分岐すべきだが簡易的にtry-except
+                try:
+                    series.format.line.color.rgb = RGBColor.from_string(color_hex)
+                except Exception:
+                    pass
+
     # 凡例設定 (デフォルトで表示)
     chart.has_legend = True
     chart.legend.include_in_layout = False

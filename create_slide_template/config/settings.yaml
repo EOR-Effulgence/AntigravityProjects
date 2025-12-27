@@ -1,0 +1,27 @@
+# Slide Generation System Configuration
+
+# Paths (Relative to project root)
+paths:
+  template_file: "JMDC2022_16対9(標準)_v1.1.pptx"
+  layout_mapping: "config/layout_mapping.json"
+  output_dir: "output"
+  prompts_dir: "prompts"
+
+# Design Settings
+design:
+  font:
+    name: "Noto Sans CJK JP"
+    language_code: "ja"
+  colors:
+    palette: 
+      - "#0052cc" # Blue (Primary)
+      - "#00a3bf" # Cyan
+      - "#26e8a8" # Green
+      - "#ff9900" # Orange
+      - "#ff5252" # Red
+      - "#5243aa" # Purple
+
+# Default Generation Settings
+generation:
+  default_slides_count: 5
+  model_name: "gemini-1.5-pro"

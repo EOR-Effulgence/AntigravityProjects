@@ -1,17 +1,10 @@
-#!/usr/bin/env python3
-"""
-Markdown (proposal.md) を解析して PPTX を生成するスクリプト
-"""
-import sys
 import re
-import os
+import sys
 from pathlib import Path
-import json
 
-# アドホックにパスを通して既存モジュールを再利用
-sys.path.append(str(Path(__file__).parent))
-import generate_slide
-import chart_utils
+# Import chart utils from sibling package
+sys.path.append(str(Path(__file__).parent.parent))
+from utils import chart_utils
 
 def parse_markdown(md_text: str) -> dict:
     """Markdownテキストをパースして中間JSON形式にする"""
@@ -42,7 +35,6 @@ def parse_markdown(md_text: str) -> dict:
             slide["layout"] = layout_match.group(1).strip()
             
         # 2. タイトル解析 (# Title)
-        # 最初の H1 をタイトルとする
         title_found = False
         body_lines = []
         
@@ -67,7 +59,7 @@ def parse_markdown(md_text: str) -> dict:
                         chart_type = code_block_lang.split(':')[1]
                         chart_text = "\n".join(code_block_content)
                         
-                        # タイトル抽出 (最初の行をタイトルと見なす簡易ロジック)
+                        # タイトル抽出
                         chart_lines = chart_text.strip().split('\n')
                         chart_title = ""
                         csv_content = chart_text
@@ -82,7 +74,20 @@ def parse_markdown(md_text: str) -> dict:
                                 "type": chart_type.upper(),
                                 "title": chart_title,
                                 "data": parsed_data,
-                                "position": {"left": 7.0, "top": 2.0, "width": 6.0, "height": 4.0} # デフォルト位置
+                                "position": {"left": 7.0, "top": 2.0, "width": 6.0, "height": 4.0}
+                            })
+
+                    # 図解ブロックの処理
+                    elif code_block_lang.startswith('diagram:'):
+                        diag_type = code_block_lang.split(':')[1]
+                        diag_items = [line.strip() for line in code_block_content if line.strip()]
+                        
+                        if diag_items:
+                            slide["diagrams"] = slide.get("diagrams", [])
+                            slide["diagrams"].append({
+                                "type": diag_type.upper(),
+                                "items": diag_items,
+                                "position": {"left": 1.0, "top": 4.0, "width": 8.0, "height": 2.5} # コンテンツ下の空き領域を想定
                             })
                     
                     code_block_content = []
@@ -103,7 +108,7 @@ def parse_markdown(md_text: str) -> dict:
                 title_found = True
                 continue
             
-            # サブタイトル解析 (## ) -> 表紙や中見出し用
+            # サブタイトル解析 (## )
             if line.strip().startswith('## '):
                 slide["subtitle"] = line.strip().replace('## ', '')
                 continue
@@ -113,7 +118,7 @@ def parse_markdown(md_text: str) -> dict:
             if img_match:
                 slide["images"].append({
                     "path": img_match.group(2),
-                    "prompt": img_match.group(1), # alt textをプロンプト代わりに
+                    "prompt": img_match.group(1),
                     "position": {"left": 7.0, "top": 2.0, "width": 6.0, "height": 4.0}
                 })
                 continue
@@ -124,36 +129,9 @@ def parse_markdown(md_text: str) -> dict:
         
         # 本文の整形
         slide["body"] = "\n".join(body_lines)
-        # リスト項目の抽出（簡易）
+        # リスト項目の抽出
         slide["content"] = [l.replace('* ', '').replace('- ', '').strip() for l in body_lines if l.strip().startswith(('*', '-'))]
         
         slides_data.append(slide)
         
     return {"slides": slides_data, "clear_existing": True}
-
-def main():
-    if len(sys.argv) < 3:
-        print("Usage: python md_to_slide.py <input.md> <output.pptx>")
-        sys.exit(1)
-        
-    input_md = sys.argv[1]
-    output_pptx = sys.argv[2]
-    
-    with open(input_md, 'r', encoding='utf-8') as f:
-        md_text = f.read()
-        
-    slide_data = parse_markdown(md_text)
-    
-    # 既存の generate_slide ロジックを流用
-    # パス設定の解決
-    script_dir = Path(__file__).parent.parent
-    template_path = script_dir / "JMDC2022_16対9(標準)_v1.1.pptx"
-    mapping_path = script_dir / "config" / "layout_mapping.json"
-    
-    # 出力ディレクトリ作成
-    Path(output_pptx).parent.mkdir(parents=True, exist_ok=True)
-    
-    generate_slide.create_presentation(str(template_path), slide_data, output_pptx, str(mapping_path))
-
-if __name__ == "__main__":
-    main()
