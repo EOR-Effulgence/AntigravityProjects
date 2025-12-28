@@ -1,0 +1,293 @@
+{
+  "slide_width": 13.333333333333334,
+  "slide_height": 7.5,
+  "masters": [
+    {
+      "id": "master_0",
+      "name": "",
+      "layouts": [
+        {
+          "index": 0,
+          "id": "unknown",
+          "name": "表紙",
+          "placeholders": [
+            {
+              "idx": 0,
+              "name": "Title 1",
+              "type": "CENTER_TITLE (3)",
+              "pos": {
+                "left": 3.1270231846019247,
+                "top": 2.7679418197725285,
+                "width": 6.847222222222222,
+                "height": 1.1456692913385826
+              },
+              "style": {
+                "alignment": "None",
+                "font_name": null,
+                "font_size": null,
+                "font_bold": null,
+                "font_italic": null,
+                "font_color": null
+              }
+            },
+            {
+              "idx": 1,
+              "name": "Subtitle 2",
+              "type": "SUBTITLE (4)",
+              "pos": {
+                "left": 3.1270231846019247,
+                "top": 4.461360454943132,
+                "width": 6.847222222222222,
+                "height": 0.4066951006124234
+              },
+              "style": {
+                "alignment": "None",
+                "font_name": null,
+                "font_size": null,
+                "font_bold": null,
+                "font_italic": null,
+                "font_color": null
+              }
+            },
+            {
+              "idx": 13,
+              "name": "テキスト プレースホルダー 10",
+              "type": "BODY (2)",
+              "pos": {
+                "left": 3.1270231846019247,
+                "top": 5.30680227471566,
+                "width": 6.847222222222222,
+                "height": 0.27165354330708663
+              },
+              "style": {
+                "alignment": "None",
+                "font_name": null,
+                "font_size": null,
+                "font_bold": null,
+                "font_italic": null,
+                "font_color": null
+              }
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "id": "unknown",
+          "name": "目次",
+          "placeholders": [
+            {
+              "idx": 0,
+              "name": "Title 1",
+              "type": "TITLE (1)",
+              "pos": {
+                "left": 0.8906255468066492,
+                "top": 1.1510422134733158,
+                "width": 11.552084426946632,
+                "height": 0.7086614173228346
+              },
+              "style": {
+                "alignment": "None",
+                "font_name": null,
+                "font_size": null,
+                "font_bold": null,
+                "font_italic": null,
+                "font_color": null
+              }
+            },
+            {
+              "idx": 11,
+              "name": "テキスト プレースホルダー 4",
+              "type": "BODY (2)",
+              "pos": {
+                "left": 3.375001093613298,
+                "top": 2.5666940069991253,
+                "width": 6.583332239720035,
+                "height": 4.273632983377078
+              },
+              "style": {
+                "alignment": "None",
+                "font_name": null,
+                "font_size": null,
+                "font_bold": null,
+                "font_italic": null,
+                "font_color": null
+              }
+            },
+            {
+              "idx": 15,
+              "name": "テキスト プレースホルダー 6",
+              "type": "BODY (2)",
+              "pos": {
+                "left": 0.6874989063867016,
+                "top": 6.862204724409449,
+                "width": 11.956692913385826,
+                "height": 0.17934383202099738
+              },
+              "style": {
+                "alignment": "None",
+                "font_name": null,
+                "font_size": null,
+                "font_bold": null,
+                "font_italic": null,
+                "font_color": null
+              }
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "id": "unknown",
+          "name": "中見出し",
+          "placeholders": [
+            {
+              "idx": 1,
+              "name": "Subtitle 2",
+              "type": "SUBTITLE (4)",
+              "pos": {
+                "left": 0.6299201662292213,
+                "top": 2.5938713910761155,
+                "width": 12.073490813648293,
+                "height": 0.984251968503937
+              },
+              "style": {
+                "alignment": "None",
+                "font_name": null,
+                "font_size": null,
+                "font_bold": null,
+                "font_italic": null,
+                "font_color": null
+              }
+            },
+            {
+              "idx": 0,
+              "name": "Title 1",
+              "type": "TITLE (1)",
+              "pos": {
+                "left": 0.6299201662292213,
+                "top": 3.75,
+                "width": 12.073490813648293,
+                "height": 0.3937007874015748
+              },
+              "style": {
+                "alignment": "None",
+                "font_name": null,
+                "font_size": null,
+                "font_bold": null,
+                "font_italic": null,
+                "font_color": null
+              }
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "id": "unknown",
+          "name": "コンテンツ",
+          "placeholders": [
+            {
+              "idx": 0,
+              "name": "Title 1",
+              "type": "TITLE (1)",
+              "pos": {
+                "left": 0.8906277340332458,
+                "top": 0.2065977690288714,
+                "width": 11.552081146106737,
+                "height": 0.6790332458442695
+              },
+              "style": {
+                "alignment": "None",
+                "font_name": null,
+                "font_size": null,
+                "font_bold": null,
+                "font_italic": null,
+                "font_color": null
+              }
+            },
+            {
+              "idx": 1,
+              "name": "Content Placeholder 2",
+              "type": "OBJECT (7)",
+              "pos": {
+                "left": 0.8906255468066492,
+                "top": 2.094076990376203,
+                "width": 11.552083333333334,
+                "height": 4.7592716535433075
+              },
+              "style": {
+                "alignment": "None",
+                "font_name": null,
+                "font_size": null,
+                "font_bold": null,
+                "font_italic": null,
+                "font_color": null
+              }
+            },
+            {
+              "idx": 13,
+              "name": "テキスト プレースホルダー 9",
+              "type": "BODY (2)",
+              "pos": {
+                "left": 0.8906266404199475,
+                "top": 0.8651640419947506,
+                "width": 11.552082239720034,
+                "height": 0.984251968503937
+              },
+              "style": {
+                "alignment": "None",
+                "font_name": null,
+                "font_size": null,
+                "font_bold": null,
+                "font_italic": null,
+                "font_color": null
+              }
+            },
+            {
+              "idx": 15,
+              "name": "テキスト プレースホルダー 6",
+              "type": "BODY (2)",
+              "pos": {
+                "left": 0.6874989063867016,
+                "top": 6.862204724409449,
+                "width": 11.956692913385826,
+                "height": 0.17934383202099738
+              },
+              "style": {
+                "alignment": "None",
+                "font_name": null,
+                "font_size": null,
+                "font_bold": null,
+                "font_italic": null,
+                "font_color": null
+              }
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "id": "unknown",
+          "name": "裏表紙",
+          "placeholders": []
+        }
+      ]
+    }
+  ],
+  "slides": [
+    {
+      "index": 4,
+      "shapes": [
+        {
+          "name": "タイトル 1",
+          "text_preview": "フォーマット変更の目的と原則（2/2）",
+          "style": {
+            "alignment": "None",
+            "font_name": "Noto Sans CJK JP Regular",
+            "font_size": 20.0,
+            "font_bold": null,
+            "font_italic": null,
+            "font_color": "THEME_NOT_THEME_COLOR (0)"
+          }
+        }
+      ]
+    }
+  ]
+}

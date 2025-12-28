@@ -1,148 +1,154 @@
-import json
+from pptx import Presentation
+from pptx.util import Inches
 import os
 import sys
-import yaml
-from pathlib import Path
-from pptx import Presentation
-from pptx.util import Inches, Pt
-# from pptx.enum.lang import MSO_LANGUAGE_ID # 必要なら
 
-# Import utils
-sys.path.append(str(Path(__file__).parent.parent))
-from utils import chart_utils, image_utils, diagram_utils
+from pptx.util import Pt
+from pptx.dml.color import RGBColor
+
+# Adjust path to include src if running from root
+sys.path.append(os.path.join(os.path.dirname(__file__), '../../'))
+
+from src.schema.slide_schema import PresentationDeck, SlideContent, SlideType
+from src.schema.slide_schema import PresentationDeck, SlideContent, SlideType
+from src.config.style_config import StyleConfig, TextStyle, JMDCFont
+from src.utils.chart_builder import ChartBuilder
 
 class SlideBuilder:
-    def __init__(self, config_path="config/settings.yaml", project_root=None):
-        self.project_root = Path(project_root) if project_root else Path(os.getcwd())
-        self.config = self._load_config(config_path)
-        self.layout_mapping = self._load_mapping()
-        self.font_name = self.config.get("design", {}).get("font", {}).get("name", "Noto Sans CJK JP")
-        self.palette = self.config.get("design", {}).get("colors", {}).get("palette", [])
+    def __init__(self, template_path: str):
+        if not os.path.exists(template_path):
+            raise FileNotFoundError(f"Template not found: {template_path}")
+        self.prs = Presentation(template_path)
         
-    def _load_config(self, path_str):
-        full_path = self.project_root / path_str
-        with open(full_path, 'r', encoding='utf-8') as f:
-            return yaml.safe_load(f)
+        # Hardcoded layout map based on analysis (could be dynamic later)
+        # Template structure:
+        # Master 0 (Index 0): Title, TOC, Section, Content, Back
+        self.layout_map = {
+            SlideType.COVER: 0,
+            SlideType.TOC: 1,
+            SlideType.SECTION: 2,
+            SlideType.CONTENT: 3,
+            SlideType.BACK_COVER: 4
+        }
 
-    def _load_mapping(self):
-        mapping_rel = self.config["paths"]["layout_mapping"]
-        full_path = self.project_root / mapping_rel
-        with open(full_path, 'r', encoding='utf-8') as f:
-            return json.load(f)["layouts"]
-
-    def build(self, slide_data: dict, output_path: str):
-        template_rel = self.config["paths"]["template_file"]
-        template_path = self.project_root / template_rel
-        
-        prs = Presentation(str(template_path))
-        
-        # Mapping layout names to indices
-        ppt_layout_indices = {}
-        for idx, layout in enumerate(prs.slide_masters[0].slide_layouts):
-            ppt_layout_indices[layout.name] = idx
-            
-        # Clear existing keys if requested
-        if slide_data.get("clear_existing", False):
-             self._clear_slides(prs)
-
-        # Add slides
-        for i, slide_info in enumerate(slide_data.get("slides", [])):
-            self._add_single_slide(prs, slide_info, ppt_layout_indices)
-            
-        # Save
-        # Make sure directory exists
-        Path(output_path).parent.mkdir(parents=True, exist_ok=True)
-        prs.save(output_path)
-        print(f"Presentation saved: {output_path}")
-
-    def _clear_slides(self, prs):
-         # xml_slides = prs.slides._sldIdLst
-         # slides = list(xml_slides)
-         # for slide in slides:
-         #    prs.slides._sldIdLst.remove(slide)
-         while len(prs.slides) > 0:
-            rId = prs.slides._sldIdLst[0].rId
-            prs.part.drop_rel(rId)
-            del prs.slides._sldIdLst[0]
-
-    def _add_single_slide(self, prs, slide_info, layout_indices):
-        layout_name = slide_info.get("layout", "コンテンツ")
-        
-        if layout_name not in self.layout_mapping:
-            print(f"Warning: Unknown layout mapping '{layout_name}'. Skipping.")
+    def _apply_text_style(self, shape, style_type: TextStyle, text: str):
+        """
+        Applies strict styling to a shape's text frame.
+        """
+        if not shape.has_text_frame:
             return
-
-        if layout_name not in layout_indices:
-             print(f"Warning: Layout '{layout_name}' not found in template.")
-             return
-
-        layout_idx = layout_indices[layout_name]
-        layout = prs.slide_masters[0].slide_layouts[layout_idx]
-        slide = prs.slides.add_slide(layout)
-        
-        ph_map = self.layout_mapping[layout_name]
-        
-        # Text Content
-        for field, config in ph_map.items():
-            if field == "description": continue
-            target_idx = config["idx"]
             
-            # Resolve content
-            content_value = slide_info.get(field)
-            if content_value is None:
-                 if field == "content" and "body" in slide_info: content_value = slide_info["body"]
-                 elif field == "body" and "content" in slide_info: content_value = slide_info["content"]
-
-            if content_value:
-                self._set_placeholder_content(slide, target_idx, content_value)
-
-        # Charts
-        if "charts" in slide_info:
-            for chart_info in slide_info["charts"]:
-                try:
-                    chart_utils.add_chart_to_slide(slide, chart_info, colors=self.palette)
-                except Exception as e:
-                    print(f"Error adding chart: {e}")
-
-        # Images
-        if "images" in slide_info:
-            for image_info in slide_info["images"]:
-                try:
-                    image_utils.add_image_to_slide(slide, image_info)
-                except Exception as e:
-                    print(f"Error adding image: {e}")
-
-        # Diagrams (New)
-        if "diagrams" in slide_info:
-             for diag_info in slide_info["diagrams"]:
-                 try:
-                     diagram_utils.create_diagram(slide, diag_info, colors=self.palette)
-                 except Exception as e:
-                     print(f"Error adding diagram: {e}")
-
-    def _set_placeholder_content(self, slide, idx, content):
-        try:
-            shape = slide.placeholders[idx]
-            text_frame = shape.text_frame
-            text_frame.clear() # clear existing
+        text_frame = shape.text_frame
+        text_frame.clear() # Clear existing dummy text/formatting
+        
+        p = text_frame.paragraphs[0]
+        run = p.add_run()
+        run.text = text
+        
+        style = StyleConfig.get_font_style(style_type)
+        
+        font = run.font
+        font.name = style["name"]
+        font.size = Pt(style["size"]) if style["size"] else None
+        font.bold = style["bold"]
+        font.italic = style["italic"]
+        
+        if style["color"]:
+            font.color.rgb = style["color"]
             
-            if isinstance(content, list):
-                for i, item in enumerate(content):
-                    p = text_frame.paragraphs[0] if i == 0 else text_frame.add_paragraph()
-                    p.text = item
-                    p.level = 0
-                    self._apply_font(p)
-            else:
-                shape.text = str(content)
-                for p in text_frame.paragraphs:
-                    self._apply_font(p)
+        # Support CJK fonts explicitly if needed (some libraries need extra handling for Asian fonts)
+        # python-pptx handles `font.name` reasonably well for installed fonts.
 
-        except KeyError:
-            pass # Placeholder not found
 
-    def _apply_font(self, paragraph):
-        # Apply font to paragraph and runs
-        paragraph.font.name = self.font_name
-        if paragraph.runs:
-            for run in paragraph.runs:
-                run.font.name = self.font_name
+    def build(self, deck: PresentationDeck, output_path: str):
+        """
+        Generates the presentation and saves it to output_path.
+        """
+        # Clear existing slides (optional, but usually we want a fresh start from template masters)
+        # Note: python-pptx doesn't easily allow deleting all slides while keeping masters unless we start with a clean template.
+        # Assuming the input template is a clean "potx" style or we just append.
+        # For this logic, we append. If the template has dummy slides, they will remain at the beginning.
+        # TODO: Implement slide removal if needed.
+
+        for slide_content in deck.slides:
+            self._create_slide(slide_content)
+        
+        self.prs.save(output_path)
+        print(f"Presentation saved to {output_path}")
+
+    def _create_slide(self, content: SlideContent):
+        layout_index = self.layout_map.get(content.type, 3) # Default to content
+        layout = self.prs.slide_layouts[layout_index]
+        slide = self.prs.slides.add_slide(layout)
+        
+        # Map content to placeholders
+        # This mapping is specific to the JMDC template structure we analyzed
+        
+        # Data Mapping
+        
+        # Title mapping
+        if content.title:
+            if slide.shapes.title:
+                # Determine title style based on slide type
+                t_style = TextStyle.TITLE_MAIN if content.type == SlideType.COVER else TextStyle.TITLE_SLIDE
+                self._apply_text_style(slide.shapes.title, t_style, content.title)
+        
+        # Subtitle / Body mapping
+        
+        if content.type == SlideType.COVER:
+            if content.subtitle:
+                try:
+                    self._apply_text_style(slide.placeholders[1], TextStyle.SUBTITLE, content.subtitle)
+                except:
+                    pass
+        
+        elif content.type == SlideType.SECTION:
+            if content.subtitle:
+                try:
+                    self._apply_text_style(slide.placeholders[1], TextStyle.SUBTITLE, content.subtitle)
+                except:
+                    pass
+
+        elif content.type == SlideType.CONTENT:
+            if content.body:
+                try:
+                    # Prefer the object placeholder for general content
+                    if 1 in [p.placeholder_format.idx for p in slide.placeholders]:
+                        self._apply_text_style(slide.placeholders[1], TextStyle.BODY, content.body)
+                except:
+                    pass
+            
+            if content.subtitle:
+                try:
+                    # Use the top text placeholder for subtitle
+                    if 13 in [p.placeholder_format.idx for p in slide.placeholders]:
+                        self._apply_text_style(slide.placeholders[13], TextStyle.SUBTITLE, content.subtitle)
+                except:
+                    pass
+
+        # Chart Handling
+        if content.chart:
+            try:
+                # Find a suitable location for the chart.
+                # Default to the center "Object" placeholder (idx 1 usually) if available,
+                # otherwise use a calculated center position.
+                
+                # Check for Content Placeholder (idx 1)
+                target_ph = None
+                for ph in slide.placeholders:
+                    if ph.placeholder_format.idx == 1:
+                        target_ph = ph
+                        break
+                
+                if target_ph:
+                    x, y = target_ph.left, target_ph.top
+                    cx, cy = target_ph.width, target_ph.height
+                else:
+                    # Fallback to roughly center
+                    x, y = Inches(1), Inches(2)
+                    cx, cy = Inches(8), Inches(4.5)
+
+                ChartBuilder.create_chart(slide, content.chart, x, y, cx, cy)
+                
+            except Exception as e:
+                print(f"Warning: Failed to create chart: {e}")
