@@ -21,6 +21,13 @@ class ChartData(BaseModel):
     categories: List[str] # X-axis labels (e.g., ["Q1", "Q2", "Q3", "Q4"])
     series: Dict[str, List[float]] # Series Name -> Data Points (e.g., {"Revenue": [10, 20, 30, 40]})
 
+class SlideElement(BaseModel):
+    type: str # 'text', 'image'
+    content: str # content or path
+    rect: Optional[List[float]] = None # [x, y, w, h] normalized (0.0-1.0)
+    font_size: Optional[float] = None
+    color: Optional[List[int]] = None
+
 class SlideContent(BaseModel):
     """
     Generic content model for a slide.
@@ -33,6 +40,7 @@ class SlideContent(BaseModel):
     bullets: Optional[List[str]] = None
     image_path: Optional[str] = None
     chart: Optional[ChartData] = None
+    elements: List[SlideElement] = [] # For custom/advanced layouts
     footer: Optional[str] = None
     
     # Metadata for specific template mapping if needed

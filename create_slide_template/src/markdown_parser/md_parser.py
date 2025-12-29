@@ -7,7 +7,7 @@ from typing import List, Dict, Any
 # Adjust path to include src if running from root
 sys.path.append(os.path.join(os.path.dirname(__file__), '../../'))
 
-from src.schema.slide_schema import PresentationDeck, SlideContent, SlideType, ChartData, ChartType
+from src.schema.slide_schema import PresentationDeck, SlideContent, SlideType, ChartData, ChartType, SlideElement
 
 class MarkdownParser:
     def parse(self, md_text: str) -> PresentationDeck:
@@ -45,6 +45,9 @@ class MarkdownParser:
         in_code_block = False
         code_block_content = []
         code_block_lang = ""
+        
+        elements = []
+        current_element_params = None
 
         layout_map = {
             "表紙": SlideType.COVER,
@@ -98,6 +101,57 @@ class MarkdownParser:
                 subtitle = line.replace('## ', '').strip()
                 continue
             
+            # Custom Element Parsing
+            # Syntax: <!-- element: type=text, rect=[0.1, 0.2, 0.3, 0.4], size=12, color=[0,0,0] -->
+            element_match = re.match(r'<!--\s*element:\s*(.+?)\s*-->', line)
+            if element_match:
+                param_str = element_match.group(1).strip()
+                # Parse params (naive split by comma, careful with lists)
+                # Let's simple regex for rect
+                params = {}
+                
+                type_match = re.search(r'type=(\w+)', param_str)
+                if type_match: params['type'] = type_match.group(1)
+                
+                rect_match = re.search(r'rect=\[([\d\.\s,]+)\]', param_str)
+                if rect_match:
+                   rect_vals = [float(x) for x in rect_match.group(1).split(',')]
+                   params['rect'] = rect_vals
+                   
+                size_match = re.search(r'size=([\d\.]+)', param_str)
+                if size_match: params['size'] = float(size_match.group(1))
+                
+                color_match = re.search(r'color=\[([\d\.\s,]+)\]', param_str)
+                if color_match:
+                   color_vals = [int(x) for x in color_match.group(1).split(',')]
+                   params['color'] = color_vals
+                   
+                # Mark upcoming lines as content for this element until empty line
+                current_element_params = params
+                continue
+            
+            # If we are inside an element context (capturing multiline content?)
+            # Simplifying assumption: Element content is the next non-empty line(s)
+            # Actually, let's treat the *next* line as content if type=text/image
+            
+            if current_element_params:
+                content_val = line
+                if current_element_params.get("type") == "image":
+                     # Strip markdown image syntax if present
+                     img_m = re.match(r'!\[.*?\]\((.*?)\)', line)
+                     if img_m:
+                         content_val = img_m.group(1)
+
+                elements.append(SlideElement(
+                    type=current_element_params.get("type", "text"),
+                    content=content_val,
+                    rect=current_element_params.get("rect"),
+                    font_size=current_element_params.get("size"),
+                    color=current_element_params.get("color")
+                ))
+                current_element_params = None # Reset
+                continue
+
             # Regular Body Text
             if line:
                 body_lines.append(line)
@@ -108,7 +162,8 @@ class MarkdownParser:
             title=title,
             subtitle=subtitle,
             body="\n".join(body_lines) if body_lines else None,
-            chart=chart_data
+            chart=chart_data,
+            elements=elements
         )
 
     def _parse_chart_block(self, lang_tag: str, content_lines: List[str]) -> ChartData:

@@ -11,7 +11,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '../../'))
 
 from src.schema.slide_schema import PresentationDeck, SlideContent, SlideType
 from src.schema.slide_schema import PresentationDeck, SlideContent, SlideType
-from src.config.style_config import StyleConfig, TextStyle, JMDCFont
+from src.config.style_config import StyleConfig, TextStyle, JMDCFont, JMDCColor
 from src.utils.chart_builder import ChartBuilder
 
 class SlideBuilder:
@@ -126,6 +126,8 @@ class SlideBuilder:
                 except:
                     pass
 
+
+
         # Chart Handling
         if content.chart:
             try:
@@ -152,3 +154,50 @@ class SlideBuilder:
                 
             except Exception as e:
                 print(f"Warning: Failed to create chart: {e}")
+
+        # Advanced Elements Handling (PDF Reconstruction)
+        if content.elements:
+            slide_width = self.prs.slide_width
+            slide_height = self.prs.slide_height
+            
+            for elem in content.elements:
+                if not elem.rect:
+                    continue
+                    
+                # Convert normalized rect to EMU/Inches
+                x = int(elem.rect[0] * slide_width)
+                y = int(elem.rect[1] * slide_height)
+                w = int(elem.rect[2] * slide_width)
+                h = int(elem.rect[3] * slide_height)
+                
+                if elem.type == "text":
+                    # Create Text Box
+                    textbox = slide.shapes.add_textbox(x, y, w, h)
+                    tf = textbox.text_frame
+                    tf.word_wrap = True
+                    p = tf.paragraphs[0]
+                    run = p.add_run()
+                    run.text = elem.content
+                    
+                    # Apply Styles
+                    run.font.name = JMDCFont.REGULAR
+                    
+                    # Heuristic font size mapping or direct use
+                    if elem.font_size:
+                        # Map PDF point size roughly to PPTX point size
+                        # Often PDF points are similar.
+                        # Enforce minimum size for readability?
+                        run.font.size = Pt(elem.font_size)
+                    else:
+                        run.font.size = Pt(12) 
+                        
+                    # Color? Default to Black or Dark Grey
+                    run.font.color.rgb = JMDCColor.TEXT_MAIN
+
+                elif elem.type == "image":
+                    # Add Picture
+                    if os.path.exists(elem.content):
+                        try:
+                            slide.shapes.add_picture(elem.content, x, y, w, h)
+                        except Exception as e:
+                            print(f"Warning: Failed to add image {elem.content}: {e}")
