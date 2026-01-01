@@ -1,0 +1,3 @@
+patterns:
+  - lang: ai-image
+    run: 'uv run scripts/generate_image.py "{{input}}" -o "{{output}}"'
