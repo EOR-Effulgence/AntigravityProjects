@@ -1,0 +1,11 @@
+basePresentationID: "1R_Y7SgxFhqSWnGs0zYaTOKlhpWQra3lebYu3jM5Rq1M" # JMDC 2022 Template
+
+defaults:
+  # 1ページ目はタイトルスライドを適用 (レイアウト名は確認が必要です)
+  # deck ls-layouts 1R_Y7SgxFhqSWnGs0zYaTOKlhpWQra3lebYu3jM5Rq1M で確認してください
+  - if: page == 1
+    layout: "タイトル" # 仮: 実際のレイアウト名に書き換えてください
+  
+  # 見出しのみのページ
+  - if: headings[1].size() == 1 && headings[2].size() == 0
+    layout: "セクションタイトル" # 仮: 実際のレイアウト名に書き換えてください

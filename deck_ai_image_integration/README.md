@@ -5,9 +5,13 @@
 ## 前提条件
 
 1.  **Deck**: `k1LoW/deck` がインストールされていること。
-2.  **Laminate**: `Songmu/laminate` がインストールされていること。
-3.  **uv**: Pythonパッケージマネージャー `uv` がインストールされていること。
-4.  **Google Cloud Project**: Gemini API が有効化されているプロジェクトと、APIキーが必要です。
+2.  **uv**: Pythonパッケージマネージャー `uv` がインストールされていること。
+3.  **Google Cloud Project**: Gemini API が有効化されているプロジェクトと、APIキーが必要です。
+4.  **Deck認証**: `deck` コマンドがGoogleスライドにアクセスできるよう、認証が完了していること。
+    ```bash
+    # 認証未実施の場合
+    deck doctor # セットアップガイドを表示
+    ```
 
 ## セットアップ
 
@@ -36,22 +40,29 @@
     ```
     ````
 
-2.  **画像生成 (Laminate)**:
-    `laminate` を実行して、コードブロック内のプロンプトから画像を生成します。
+2.  **スライド生成 (一括処理)**:
+    処理用スクリプトを実行します。これにより、以下の処理が自動で行われます。
+    - Markdown内の `ai-image` ブロックを検出
+    - Gemini API で画像を生成し `assets/generated/` に保存
+    - 画像リンクを埋め込んだ一時ファイルを生成
+    - `deck` コマンドを実行してGoogleスライドへ変換
+
     ```bash
-    laminate apply --config laminate.yaml sample_presentation.md
+    # 仮想環境内で実行する場合
+    uv run scripts/process_slides.py sample_presentation.md
     ```
 
-3.  **スライド変換 (Deck)**:
-    `deck` を実行して、画像を埋め込んだスライドを生成します。
+    `deck` コマンドの実行をスキップし、Markdownの生成のみを行いたい場合は `--no-deck` オプションを使用してください。
+
     ```bash
-    deck sample_presentation.md
+    uv run scripts/process_slides.py sample_presentation.md --no-deck
     ```
 
 ## 設定
 
--   **`laminate.yaml`**: 画像生成コマンドの設定。
+-   **`scripts/process_slides.py`**: 全体フロー制御。
 -   **`scripts/generate_image.py`**: 画像生成ロジック。モデル名（デフォルト: `imagen-3.0-generate-001`）やアスペクト比を変更できます。
+-   **`deck.yaml`**: `deck` ツールの設定（テンプレートID、レイアウトマッピングなど）。
 
 ## 代替ワークフロー: Antigravityとの対話的生成
 
